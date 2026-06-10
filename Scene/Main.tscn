@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbrhpsagx3fux"]
+
+[ext_resource type="Script" uid="uid://dlqo7j1ljn8l5" path="res://scripts/gameManager.gd" id="1_h175a"]
+[ext_resource type="Texture2D" uid="uid://ditpoauqiprtl" path="res://sprite/sea1.jpg" id="1_xhtwi"]
+[ext_resource type="PackedScene" uid="uid://diq6npq4tiqrh" path="res://Scene/little_fish.tscn" id="2_djkur"]
+[ext_resource type="PackedScene" uid="uid://clb8637bsmdbr" path="res://Scene/player_fish.tscn" id="2_g6ejq"]
+[ext_resource type="PackedScene" uid="uid://dpdjk6b3i5bwx" path="res://Scene/swordFish.tscn" id="3_h3nmf"]
+[ext_resource type="PackedScene" uid="uid://tl3wl0idwao5" path="res://Scene/shark.tscn" id="4_hueuk"]
+[ext_resource type="FontFile" uid="uid://bawm1nm18p5bf" path="res://sprite/Uranus_Pixel_11Px.ttf" id="5_togfq"]
+[ext_resource type="AudioStream" uid="uid://cpv7k1fv8pjs3" path="res://sprite/迷幻冒险-像素迷宫_爱给网_aigei_com.mp3" id="6_aan6j"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g6ejq"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("spawn_timer", "score_label", "health_label")]
+y_sort_enabled = true
+script = ExtResource("1_h175a")
+fish_scene = ExtResource("2_djkur")
+fish_scene1 = ExtResource("3_h3nmf")
+shark_scene = ExtResource("4_hueuk")
+spawn_timer = NodePath("Timer")
+score_label = NodePath("CanvasLayer/Label")
+health_label = NodePath("CanvasLayer/health")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(575.0355, 327.5)
+scale = Vector2(0.9600592, 0.96005917)
+texture = ExtResource("1_xhtwi")
+
+[node name="PlayerFish" parent="." instance=ExtResource("2_g6ejq")]
+position = Vector2(365, 242)
+scale = Vector2(0.5, 0.5)
+
+[node name="Boundary" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Boundary"]
+position = Vector2(596, 650)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_g6ejq")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Boundary"]
+position = Vector2(573, 6)
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D2"]
+shape = SubResource("WorldBoundaryShape2D_g6ejq")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Boundary"]
+position = Vector2(1151, 357)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D3"]
+shape = SubResource("WorldBoundaryShape2D_g6ejq")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Boundary"]
+position = Vector2(-1, 366)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary/StaticBody2D4"]
+shape = SubResource("WorldBoundaryShape2D_g6ejq")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 19.0
+offset_top = 6.0
+offset_right = 184.0
+offset_bottom = 55.0
+theme_override_colors/font_outline_color = Color(0.36057672, 0.6282836, 0.24379814, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("5_togfq")
+theme_override_font_sizes/font_size = 48
+text = "score : 0"
+
+[node name="health" type="Label" parent="CanvasLayer"]
+offset_left = 17.0
+offset_top = 60.0
+offset_right = 75.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_togfq")
+theme_override_font_sizes/font_size = 51
+text = "生命：3"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_aan6j")
+volume_db = -38.519
+autoplay = true
+
+[connection signal="timeout" from="Timer" to="." method="_spawn_fish"]

@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://cgehsb1oway8i"]
+
+[ext_resource type="FontFile" uid="uid://bawm1nm18p5bf" path="res://sprite/Uranus_Pixel_11Px.ttf" id="1_j44jw"]
+[ext_resource type="Theme" uid="uid://bdc7l05sd2f11" path="res://Theme/main_screen.tres" id="1_u8psj"]
+[ext_resource type="Texture2D" uid="uid://bt1ala8y7halu" path="res://sprite/dave.png" id="2_aeh8j"]
+[ext_resource type="Script" uid="uid://bafblm02yfdp8" path="res://scripts/title_screen.gd" id="2_up4ea"]
+
+[sub_resource type="Animation" id="Animation_up4ea"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("V:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(476, 272)]
+}
+
+[sub_resource type="Animation" id="Animation_aeh8j"]
+resource_name = "enter"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("V:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.39229217, 1),
+"update": 0,
+"values": [Vector2(1227, 272), Vector2(476, 272)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_axahy"]
+_data = {
+&"RESET": SubResource("Animation_up4ea"),
+&"enter": SubResource("Animation_aeh8j")
+}
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u8psj")
+script = ExtResource("2_up4ea")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -74.0
+offset_right = 1152.0
+offset_bottom = 721.0
+texture = ExtResource("2_aeh8j")
+expand_mode = 1
+
+[node name="title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -1.0
+offset_top = 59.0
+offset_bottom = 139.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(9.62615e-08, 0.46206498, 0.68005145, 1)
+theme_override_constants/outline_size = 50
+theme_override_fonts/font = ExtResource("1_j44jw")
+theme_override_font_sizes/font_size = 116
+text = "大鱼吃小鱼"
+horizontal_alignment = 1
+
+[node name="V" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -52.0
+offset_right = 100.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="startgame" type="Button" parent="V"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_outline_color = Color(0, 0.57254905, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("1_j44jw")
+theme_override_font_sizes/font_size = 50
+text = "开始游戏"
+
+[node name="exitgame" type="Button" parent="V"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0.81960785, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("1_j44jw")
+theme_override_font_sizes/font_size = 50
+text = "退出游戏"
+
+[node name="help" type="Button" parent="V"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.88, 0.88, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("1_j44jw")
+theme_override_font_sizes/font_size = 50
+text = "游戏帮助"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_axahy")
+}
+autoplay = "enter"
+
+[connection signal="pressed" from="V/startgame" to="." method="_on_startgame_pressed"]
+[connection signal="pressed" from="V/exitgame" to="." method="_on_exitgame_pressed"]
+[connection signal="pressed" from="V/help" to="." method="_on_button_pressed"]

@@ -1,0 +1,15 @@
+[gd_resource type="Theme" format=3 uid="uid://bdc7l05sd2f11"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3nc1c"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ev7t3"]
+
+[resource]
+Button/styles/disabled = SubResource("StyleBoxEmpty_3nc1c")
+Button/styles/hover = SubResource("StyleBoxEmpty_ev7t3")
+Button/styles/normal = SubResource("StyleBoxEmpty_ev7t3")
+Button/styles/pressed = SubResource("StyleBoxEmpty_ev7t3")

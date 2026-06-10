@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpdjk6b3i5bwx"]
+
+[ext_resource type="Texture2D" uid="uid://be5xwfql07sf6" path="res://sprite/626f0f004a4bc35955130fc5f62764ef.png" id="1_irl43"]
+[ext_resource type="Script" uid="uid://ba0frxqw155rx" path="res://scripts/sword_fish.gd" id="1_yoife"]
+[ext_resource type="AudioStream" uid="uid://cc4fro4wmbj5w" path="res://sprite/pickupCoin.wav" id="3_nniwp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoife"]
+atlas = ExtResource("1_irl43")
+region = Rect2(0, 0, 101, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nniwp"]
+atlas = ExtResource("1_irl43")
+region = Rect2(101, 0, 101, 71)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qon1b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoife")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nniwp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ffnvi"]
+size = Vector2(130, 40)
+
+[node name="swordFish" type="Area2D"]
+script = ExtResource("1_yoife")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(652.00354, 388.25)
+scale = Vector2(1.3169013, 1.3169014)
+sprite_frames = SubResource("SpriteFrames_qon1b")
+autoplay = "default"
+frame = 1
+frame_progress = 0.01668654
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(651, 390)
+shape = SubResource("RectangleShape2D_ffnvi")
+
+[node name="getScore" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nniwp")
+volume_db = -10.015
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

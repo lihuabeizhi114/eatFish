@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://c53b2jatsyoc6"]
+
+[ext_resource type="Script" uid="uid://b7117kd5pvvvw" path="res://scripts/game_help.gd" id="1_7qfql"]
+[ext_resource type="Texture2D" uid="uid://jmflw30x3y1h" path="res://sprite/white.png" id="1_46wuq"]
+[ext_resource type="FontFile" uid="uid://bawm1nm18p5bf" path="res://sprite/Uranus_Pixel_11Px.ttf" id="2_7qfql"]
+
+[node name="gameHelp" type="Control" unique_id=886005160]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7qfql")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=156064979]
+layout_mode = 0
+offset_right = 1147.0
+offset_bottom = 641.0
+texture = ExtResource("1_46wuq")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="." unique_id=1813877812]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 514.0
+offset_right = 690.0
+offset_bottom = 564.0
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("2_7qfql")
+theme_override_font_sizes/font_size = 41
+text = "→返回游戏←"
+
+[node name="Label" type="Label" parent="." unique_id=909783448]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 133.0
+offset_right = 1391.0
+offset_bottom = 396.0
+theme_override_colors/font_color = Color(0, 1, 0.9666667, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("2_7qfql")
+theme_override_font_sizes/font_size = 30
+text = "游戏帮助：听着兄弟，这和普通的大鱼吃小鱼一样简单！
+你要做的就是吃掉黄色的小鱼，然后尝试去吃掉剑鱼和鲨鱼！
+我能给你的提示就是，当你的分数大于或等于25分时，你才可以吃剑鱼！
+当你的分数大于或等于100分时，你才可以吃鲨鱼！
+切记！如果你的血量完全消失，那么你的游戏就失败了！
+现在，去吃鱼吧！"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

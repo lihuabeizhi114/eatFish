@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://tl3wl0idwao5"]
+
+[ext_resource type="Texture2D" uid="uid://cnd2bajckjms2" path="res://sprite/dayu.png" id="1_dqnvo"]
+[ext_resource type="Script" uid="uid://jrxmv8ar07n" path="res://scripts/shark.gd" id="1_gunbh"]
+[ext_resource type="AudioStream" uid="uid://cc4fro4wmbj5w" path="res://sprite/pickupCoin.wav" id="3_jatwn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gunbh"]
+atlas = ExtResource("1_dqnvo")
+region = Rect2(240, 0, 240, 134)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jatwn"]
+atlas = ExtResource("1_dqnvo")
+region = Rect2(0, 0, 240, 134)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wbudj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gunbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jatwn")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmipk"]
+size = Vector2(214, 71)
+
+[node name="shark" type="Area2D"]
+script = ExtResource("1_gunbh")
+require_min_score = 100
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(385, 217)
+sprite_frames = SubResource("SpriteFrames_wbudj")
+animation = &"new_animation"
+frame = 1
+frame_progress = 0.3343884
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(384, 233.5)
+shape = SubResource("RectangleShape2D_kmipk")
+
+[node name="getScore" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jatwn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

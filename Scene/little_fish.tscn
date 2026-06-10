@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://diq6npq4tiqrh"]
+
+[ext_resource type="Texture2D" uid="uid://be5xwfql07sf6" path="res://sprite/626f0f004a4bc35955130fc5f62764ef.png" id="1_nsm8h"]
+[ext_resource type="Script" uid="uid://hiy1yvna0ghv" path="res://scripts/little_fish.gd" id="1_sk1vl"]
+[ext_resource type="AudioStream" uid="uid://cc4fro4wmbj5w" path="res://sprite/pickupCoin.wav" id="3_urylj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk1vl"]
+atlas = ExtResource("1_nsm8h")
+region = Rect2(0, 104, 55, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_urylj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk1vl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2jrl"]
+size = Vector2(54, 41)
+
+[node name="littleFish" type="Area2D"]
+script = ExtResource("1_sk1vl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(629.8462, 343)
+scale = Vector2(2.2307696, 2.2307699)
+sprite_frames = SubResource("SpriteFrames_urylj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(631, 342.5)
+shape = SubResource("RectangleShape2D_e2jrl")
+
+[node name="getScore" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_urylj")
+volume_db = -4.622
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
